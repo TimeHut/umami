@@ -29,6 +29,8 @@ create table session (
     website_id int not null references website(website_id) on delete cascade,
     created_at timestamp with time zone default current_timestamp,
     hostname varchar(100),
+    ip varchar(100),
+    user_agent varchar(500),
     browser varchar(20),
     os varchar(20),
     device varchar(20),
@@ -43,6 +45,7 @@ create table pageview (
     session_id int not null references session(session_id) on delete cascade,
     created_at timestamp with time zone default current_timestamp,
     url varchar(500) not null,
+    ref varchar(64),
     referrer varchar(500)
 );
 
@@ -52,6 +55,7 @@ create table event (
     session_id int not null references session(session_id) on delete cascade,
     created_at timestamp with time zone default current_timestamp,
     url varchar(500) not null,
+    ref varchar(64),
     event_type varchar(50) not null,
     event_value varchar(50) not null
 );

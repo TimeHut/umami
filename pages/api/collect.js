@@ -43,13 +43,13 @@ export default async (req, res) => {
   } = req;
 
   if (type === 'pageview') {
-    const { url, referrer } = payload;
+    const { url, ref, referrer } = payload;
 
-    await savePageView(website_id, session_id, url, referrer);
+    await savePageView(website_id, session_id, url, ref, referrer);
   } else if (type === 'event') {
-    const { url, event_type, event_value } = payload;
+    const { url, ref, event_type, event_value } = payload;
 
-    await saveEvent(website_id, session_id, url, event_type, event_value);
+    await saveEvent(website_id, session_id, url, ref, event_type, event_value);
   } else {
     return badRequest(res);
   }
