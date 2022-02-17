@@ -61,11 +61,13 @@ import { removeTrailingSlash } from '../lib/url';
   const collect = (type, params, uuid) => {
     if (disableTracking()) return;
 
+    const ref = sessionStorage.getItem('umami.ref');
     const payload = {
       website: uuid,
       hostname,
       screen,
       language,
+      ref,
       cache: useCache && sessionStorage.getItem(cacheKey),
     };
 
