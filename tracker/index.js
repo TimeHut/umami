@@ -61,7 +61,20 @@ import { removeTrailingSlash } from '../lib/url';
   const collect = (type, params, uuid) => {
     if (disableTracking()) return;
 
-    const ref = sessionStorage.getItem('umami.ref');
+    let ref = 'organic';
+    const refInStorage = localStorage.getItem('cybee.ref');
+    if (refInStorage) {
+      try {
+        const obj = JSON.parse(refInStorage);
+        const now = new Date().getTime();
+        if (obj && obj.t > now - 7 * 86400 * 1000) {
+          ref = obj.r;
+        }
+      } catch {
+        // empty
+      }
+    }
+
     const payload = {
       website: uuid,
       hostname,
