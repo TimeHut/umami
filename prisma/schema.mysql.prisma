@@ -23,6 +23,7 @@ model event {
   session_id  Int       @db.UnsignedInt
   created_at  DateTime? @default(now()) @db.Timestamp(0)
   url         String    @db.VarChar(500)
+  ref         String?   @db.VarChar(64)
   event_type  String    @db.VarChar(50)
   event_value String    @db.VarChar(50)
   session     session   @relation(fields: [session_id], references: [session_id])
@@ -39,6 +40,7 @@ model pageview {
   session_id Int       @db.UnsignedInt
   created_at DateTime? @default(now()) @db.Timestamp(0)
   url        String    @db.VarChar(500)
+  ref        String?   @db.VarChar(64)
   referrer   String?   @db.VarChar(500)
   session    session   @relation(fields: [session_id], references: [session_id])
   website    website   @relation(fields: [website_id], references: [website_id])
@@ -56,6 +58,8 @@ model session {
   website_id   Int        @db.UnsignedInt
   created_at   DateTime?  @default(now()) @db.Timestamp(0)
   hostname     String?    @db.VarChar(100)
+  ip           String?    @db.VarChar(100)
+  user_agent   String?    @db.VarChar(500)
   browser      String?    @db.VarChar(20)
   os           String?    @db.VarChar(20)
   device       String?    @db.VarChar(20)
