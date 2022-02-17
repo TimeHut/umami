@@ -70,7 +70,7 @@ import { removeTrailingSlash } from '../lib/url';
         if (obj && obj.t > now - 7 * 86400 * 1000) {
           ref = obj.r;
         }
-      } catch {
+      } catch (e) {
         // empty
       }
     }
